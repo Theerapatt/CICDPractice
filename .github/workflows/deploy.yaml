@@ -1,4 +1,4 @@
-name: Deploy ON Push
+name: Check If Code Build
 
 on:
     push:
@@ -16,10 +16,16 @@ jobs:
               run: |
                   ls -la
 
-            - name: Install npm
-              uses: actions/checkout@v4
+            - name: Install pnpm
+              uses: pnpm/action-setup@v4
               with:
                   run_install: false
+
+            # Install NodeJS
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "24"
 
             - name: Install dependencies
               run: pnpm install
