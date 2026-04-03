@@ -9,7 +9,20 @@ jobs:
     check:
         runs-on: ubuntu-latest
         steps:
-            - name: Testing
+            - name: Clone Codebase
+              uses: actions/checkout@v6
+
+            - name: Check If File Exist
               run: |
-                  echo "Testing CI/CD pipeline"
-                  echo "Testing CI/CD pipeline 2"
+                  ls -la
+
+            - name: Install pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  run_install: false
+
+            - name: Install dependencies
+              run: pnpm install
+
+            - name: Build Codebase
+              run: pnpm run build
